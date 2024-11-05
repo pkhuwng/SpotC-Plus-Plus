@@ -445,7 +445,7 @@ jobs:
         rm -f Info.plist
 
     - name: Check if Vanilla Spotify was updated
-      run: echo "VANSPOTISUPDATED=$(curl -s https://api.github.com/repos/SpotCompiled/SpotC-Plus-Plus/releases/latest | jq -r '.body' | grep -q "Spotify to version ${{ env.VANILLASPOTIFYVERSION }}" && echo false || echo true)" >> $GITHUB_ENV
+      run: echo "VANSPOTISUPDATED=$(curl -s https://api.github.com/repos/pkhuwng/SpotC-Plus-Plus/releases/latest | jq -r '.body' | grep -q "Spotify to version ${{ env.VANILLASPOTIFYVERSION }}" && echo false || echo true)" >> $GITHUB_ENV
 
     - name: Set Change Version
       id: set-change-version
@@ -454,7 +454,7 @@ jobs:
         CHANGEVERSION="${{ github.event.inputs.CHANGEVERSION }}"
         # If CHANGEVERSION is not provided, fetch the latest tag from GitHub API
         if [ -z "$CHANGEVERSION" ]; then
-          latest_tag=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/SpotCompiled/SpotC-Plus-Plus/releases/latest | jq -r .tag_name)
+          latest_tag=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/pkhuwng/SpotC-Plus-Plus/releases/latest | jq -r .tag_name)
           # Extract the version number without the 'v' prefix
           version=${latest_tag#v}
           # Split the version number into major, minor, and patch components
@@ -643,7 +643,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Download AltStore Repo.json
-      run: curl "https://raw.githubusercontent.com/SpotCompiled/SpotC-AltStore-Repo/main/AltStore%20Repo.json" -o ./AltStoreRepo.json
+      run: curl "https://raw.githubusercontent.com/pkhuwng/SpotC-AltStore-Repo/main/AltStore%20Repo.json" -o ./AltStoreRepo.json
 
     - name: Calculate SpotC++ Filesize
       run: |
@@ -665,7 +665,7 @@ jobs:
 
     - name: Set ALTSTORECHANGELOG environment variable
       run: |
-        ALTSTORECHANGELOG="Updated EeveeSpotify to ${{ env.EEVEEVERSIONNAME }}, fixed several bugs. ${{ env.BULLET_POINT }}\n\n More Info:\n https://github.com/SpotCompiled/SpotC-Plus-Plus/releases/tag/v${{ env.CHANGEVERSION }}"
+        ALTSTORECHANGELOG="Updated EeveeSpotify to ${{ env.EEVEEVERSIONNAME }}, fixed several bugs. ${{ env.BULLET_POINT }}\n\n More Info:\n https://github.com/pkhuwng/SpotC-Plus-Plus/releases/tag/v${{ env.CHANGEVERSION }}"
         echo "ALTSTORECHANGELOG=$ALTSTORECHANGELOG" >> $GITHUB_ENV
       
     - name: Update AltStore Repo.json
@@ -687,12 +687,12 @@ jobs:
            (.apps[] | select(.name == "SpotC++") | .size) = ($SIZE | tonumber) |
            (.apps[] | select(.name == "SpotC++") | .changelog) = $ALTSTORECHANGELOG |
            (.apps[] | select(.name == "SpotC++") | .versionDescription) = $ALTSTORECHANGELOG |
-           (.apps[] | select(.name == "SpotC++") | .downloadURL) = "https://github.com/SpotCompiled/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION)_ALTSTORESOURCE_ONLY.ipa" |
+           (.apps[] | select(.name == "SpotC++") | .downloadURL) = "https://github.com/pkhuwng/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION)_ALTSTORESOURCE_ONLY.ipa" |
            (.apps[] | select(.name == "SpotC++") | .versions) |= [{
               "version": $CHANGEVERSION,
               "date": $CURRENTDATE,
               "localizedDescription": $ALTSTORECHANGELOG,
-              "downloadURL": "https://github.com/SpotCompiled/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION)_ALTSTORESOURCE_ONLY.ipa",
+              "downloadURL": "https://github.com/pkhuwng/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION)_ALTSTORESOURCE_ONLY.ipa",
               "size": ($SIZE | tonumber),
               "minOSVersion": "15.0"
            }] + . |
@@ -750,7 +750,7 @@ jobs:
         path: AltStoreRepo.json
 
     - name: Download Scarlet Repo.json
-      run: curl "https://raw.githubusercontent.com/SpotCompiled/SpotC-Repo/main/Scarlet%20Repo.json" -o ./ScarletRepo.json
+      run: curl "https://raw.githubusercontent.com/pkhuwng/SpotC-Repo/main/Scarlet%20Repo.json" -o ./ScarletRepo.json
 
     - name: Update Scarlet Repo.json
       run: |
@@ -771,12 +771,12 @@ jobs:
            (.apps[] | select(.name == "SpotC++") | .size) = ($SIZE | tonumber) |
            (.apps[] | select(.name == "SpotC++") | .changelog) = $SCARLETCHANGELOG |
            (.apps[] | select(.name == "SpotC++") | .versionDescription) = $SCARLETCHANGELOG |
-           (.apps[] | select(.name == "SpotC++") | .downloadURL) = "https://github.com/SpotCompiled/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION).ipa" |
+           (.apps[] | select(.name == "SpotC++") | .downloadURL) = "https://github.com/pkhuwng/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION).ipa" |
            (.apps[] | select(.name == "SpotC++") | .versions) |= [{
               "version": $CHANGEVERSION,
               "date": $CURRENTDATE,
               "localizedDescription": $SCARLETCHANGELOG,
-              "downloadURL": "https://github.com/SpotCompiled/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION).ipa",
+              "downloadURL": "https://github.com/pkhuwng/SpotC-Plus-Plus/releases/download/v\($CHANGEVERSION)/SpotC++.v\($CHANGEVERSION)_v\($VANILLASPOTIFYVERSION).ipa",
               "size": ($SIZE | tonumber),
               "minOSVersion": "15.0"
            }] + . |
