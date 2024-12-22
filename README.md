@@ -40,14 +40,14 @@ You can add my repo to Scarlet and other sideloading apps for automatic updates 
 ***
 
 ## How do I add my "Musixmatch token"?<br/>
-In version 3.0.0 the option to use Musixmatch as a lyric provider was added, you must add your user token so that the app may access the Musixmatch API. Instructions for doing so are below.
+In version 2.2.0 the option to use Musixmatch as a lyric provider was added, you must add your user token so that the app may access the Musixmatch API. However, in version 2.3.4 you can now request an anonymous Musixmatch token, simply by pressing the button when prompted for a token, if you want to use your own you can follow the following instructions below.
 <details>
 <summary>Intructions</summary><be>
 1. Download the Musixmatch Lyrics Finder app from the app store.<br/>
 2. Open the Musixmatch app.<br/>
 3. Login/Create an account.<br/>
 4. Go to settings (Top right corner) > Scroll all the way down > click "Get help" > click "Copy debug info"<br/>
-5. Paste this into SpotveeC, when it asks you for your user token.<br/>
+5. Paste this into SpotC++, when it asks you for your user token.<br/>
 </details>
 
 ## How it's Made<br/>
