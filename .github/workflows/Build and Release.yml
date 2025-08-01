@@ -103,6 +103,17 @@ jobs:
         echo "spotifypath=Build Components/$downloaded_file" >> $GITHUB_ENV
       env:
         SPOTURL: ${{ github.event.inputs.SPOTURL }}
+
+    - name: Verify Spotify IPA
+      run: |
+        if [ ! -f "${{ env.spotifypath }}" ]; then
+        echo "Spotify IPA not found at ${{ env.spotifypath }}"
+        exit 1
+        fi
+        if ! unzip -tq "${{ env.spotifypath }}" > /dev/null; then
+        echo "Spotify IPA is not a valid zip archive"
+        exit 1
+        fi
       
     - name: Upload Spotify IPA to VirusTotal
       if: ${{ env.VIRUSTOTALKEY }}
